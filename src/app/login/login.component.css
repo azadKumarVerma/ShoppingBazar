@@ -1,0 +1,29 @@
+.set-background{
+    background-color: cadetblue;
+    height: 100% !important;
+    width: 100% !important;
+    background-repeat: repeat-x;
+}
+
+.justify-content-center{
+    justify-content: center;
+}
+
+.set-background-white{
+    background-color: white;
+    box-shadow: 0 20px 35px 5px rgba(0, 0, 0, 0.2);
+    color: #000;
+}
+
+.padding-20{
+  padding: 20px;
+}
+
+.set-cursor{
+cursor: pointer;
+text-decoration: underline;
+}
+
+.background-white{
+    color: white;
+}
