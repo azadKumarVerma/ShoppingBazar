@@ -1,3 +1,20 @@
-<p>
-  home works!
-</p>
+<!-- <p>
+  Welcome to shopping bazar
+</p> -->
+<!-- <router-outlet></router-outlet> -->
+<section>
+  <div class="row">
+      Welcome to shopping bazar
+  </div>
+  <div class="row">
+     <div class="col-lg-3 col-md-3 col-sm-6 col-sm-12" *ngFor = "let product of productList">
+      <div class="text-center zoom-content">
+        <img [src]="product.image" alt="image not available" class="product-image">
+      </div>
+      <div class="text-center mt-2 zoom-content">
+       <h5> {{product.title | uppercase}}</h5>
+       <h5> {{product.price | currency:'INR'}}</h5>
+      </div>
+     </div>
+  </div>
+</section>

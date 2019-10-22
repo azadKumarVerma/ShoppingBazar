@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpService } from './shared/services/api/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, 
+    private httpService: HttpService) { }
 
   loginUser(endodedUser){
     let headers = new HttpHeaders({
@@ -14,11 +16,11 @@ export class UserService {
       Authorization: `Basic ${endodedUser}`
     });
     let options = {headers : headers};
-    return this.http.post('http://localhost:9000/auth/', {}, options);
+    return this.http.post('auth/', {}, options);
 
   }
 
   signupUser(body){
-    return this.http.post('http://localhost:9000/users/',body)
+    return this.http.post('users/',body)
   }
 }

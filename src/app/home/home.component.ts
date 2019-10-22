@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  productList: any = [];
+
+  constructor( private homeService: HomeService) { }
 
   ngOnInit() {
+    this.getAllProducts();
+  }
+
+  getAllProducts(){
+    this.homeService.fetchAllProducts().subscribe(
+      res=>{
+         console.log("res ---------------- ", res);
+         if(res.res) this.productList = res.res.products;
+      },
+      err=>{
+        console.log("error --------- ", err);
+      }
+    );
   }
 
 }

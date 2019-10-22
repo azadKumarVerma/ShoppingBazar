@@ -1,0 +1,29 @@
+<section>
+    <div class="row">
+        <div class="col-12">
+            <form [formGroup]='categoryForm'  (ngSubmit)="submit()">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="formGroup">
+                            <label for="code">Code</label>
+                            <input id = 'code' type="text" class="form-control" [formControl]='code'
+                            [ngClass]="formValidator.validate(code)">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="formGroup">
+                            <label for="name">Name</label>
+                            <input type="text" id = 'name' class="form-control" [formControl]='name'
+                            [ngClass]="formValidator.validate(name)">
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="formGroup text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

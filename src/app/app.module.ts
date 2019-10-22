@@ -9,12 +9,11 @@ import {
   FacebookLoginProvider,
 } from "angular-6-social-login";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NotifierModule } from 'angular-notifier';
 
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderSuccessfullComponent } from './order-successfull/order-successfull.component';
@@ -25,6 +24,8 @@ import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import { TokenInterceptorService } from './shared/services/api/token-interceptor.service';
 
 // config
 export function getAuthServiceConfigs() {
@@ -42,12 +43,18 @@ export function getAuthServiceConfigs() {
   );
   return config;
 }
+
+export const httpInterceptorProvider = [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi:true
+  }
+]
 @NgModule({
   declarations: [
     AppComponent,
     BsNavbarComponent,
-    HomeComponent,
-    ProductsComponent,
     ShoppingCartComponent,
     CheckoutComponent,
     OrderSuccessfullComponent,
@@ -65,51 +72,62 @@ export function getAuthServiceConfigs() {
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: HomeComponent
-      },
-      {
-        path: 'products',
-        component: ProductsComponent
-      },
-      {
-        path: 'shopping-cart',
-        component: ShoppingCartComponent
-      },
-      {
-        path: 'check-out',
-        component: CheckoutComponent
-      },
-      {
-        path: 'order-success',
-        component: OrderSuccessfullComponent
-      },
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
-        path: 'sign-up',
-        component: SignUpComponent
-      },
-      {
-        path: 'my/orders',
-        component: MyOrdersComponent
-      },
-      {
-        path: 'admin/products',
-        component: AdminProductsComponent
-      },
-      {
-        path: 'admin/orders',
-        component: AdminOrdersComponent
-      }
+    AppRoutingModule,
+    NotifierModule,
+    // RouterModule.forRoot([
+    //   {
+    //     path: 'app',
+    //     component: HomeComponent,
+    //       children:[
+    //       {
+    //         path: 'products',
+    //         // component: ProductsComponent
+    //         loadChildren: './products/products.module#ProductsModule'
+    //       },
+    //       {
+    //         path: 'shopping-cart',
+    //         component: ShoppingCartComponent
+    //       },
+    //       {
+    //         path: 'check-out',
+    //         component: CheckoutComponent
+    //       },
+    //       {
+    //         path: 'order-success',
+    //         component: OrderSuccessfullComponent
+    //       },
+    //       {
+    //         path: 'login',
+    //         component: LoginComponent
+    //       },
+    //       {
+    //         path: 'sign-up',
+    //         component: SignUpComponent
+    //       },
+    //       {
+    //         path: 'my/orders',
+    //         component: MyOrdersComponent
+    //       },
+    //       {
+    //         path: 'admin/products',
+    //         component: AdminProductsComponent
+    //       },
+    //       {
+    //         path: 'admin/orders',
+    //         component: AdminOrdersComponent
+    //       },
+    //     ]
+    //   },
+    //   // {
+    //   //   path: '',
+    //   //   redirectTo: 'app',
+    //   //   pathMatch: 'full'
+    //   // }
 
-    ])
+    // ])
   ],
   providers: [
+    httpInterceptorProvider,
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs

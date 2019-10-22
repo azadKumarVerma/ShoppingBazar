@@ -1,0 +1,49 @@
+<section>
+    <div class="row">
+        <div class="col-12">
+            <form [formGroup]='productForm'  (ngSubmit)="submit()">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="formGroup">
+                            <label for="title">Title</label>
+                            <input id = 'title' type="text" class="form-control" [formControl]='title'
+                            [ngClass]="formValidator.validate(title)" placeholder="Enter title">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="formGroup">
+                            <label for="category">Category</label>
+                            <select id='category' name="category" class="form-control" [formControl]="category"
+                             [ngClass]="formValidator.validate(category)">
+                                <option [ngValue]=null disabled>Select Category</option>                                    
+                                <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
+                            </select>
+                            
+                            <!-- <input type="text" id = 'category' class="form-control" [formControl]='category'
+                            [ngClass]="formValidator.validate(category)"> -->
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="formGroup">
+                            <label for="price">Price</label>
+                            <input type="text" class="form-control" [formControl]='price'
+                             [ngClass]="formValidator.validate(price)" placeholder="Enter price">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="formGroup">
+                            <label for="image">Image</label>
+                            <input type="text" class="form-control" [formControl]='image'
+                            [ngClass]="formValidator.validate(image)">
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="formGroup text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

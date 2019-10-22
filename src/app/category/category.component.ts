@@ -3,11 +3,11 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class CategoryComponent implements OnInit {
 
   constructor(private fb : FormBuilder,
     private router: Router
@@ -16,8 +16,9 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
   }
 
-  navigateToProduct(){
-    this.router.navigate(['app/products/create-product']);
+  navigateToCreateProduct(){
+    this.router.navigate(['app/category/create-category']);
   }
+
 
 }
